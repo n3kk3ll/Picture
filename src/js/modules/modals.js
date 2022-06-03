@@ -86,7 +86,7 @@ const modals = () => {
     });
   }
 
-  showModalAfterTime(`.popup-consultation`, 6e3);
+  showModalAfterTime(`.popup-consultation`, 60e3);
   showModalByScroll(`.fixed-gift`);
   handleModal(`.button-design`, `.popup-design`, `.popup-close`);
   handleModal(`.button-consultation`, `.popup-consultation`, `.popup-close`);

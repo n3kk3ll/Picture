@@ -5,6 +5,7 @@ import mask from "./modules/mask";
 import isRussianLetters from "./modules/isRussianLetters";
 import showCards from "./modules/showCards";
 // import showCardsFromServer from "./modules/showCardsFromServer";
+import calcPrice from "./modules/calcPrice";
 
 window.addEventListener(`DOMContentLoaded`, () => {
   'use strict';
@@ -23,4 +24,6 @@ window.addEventListener(`DOMContentLoaded`, () => {
 
   // 2. By interacting with server
   // showCardsFromServer(`.button-styles`, `#styles .row`);
+
+  calcPrice(`#size`, `#material`, `#options`, `.promocode`, `.calc-price`);
 });

@@ -57,12 +57,6 @@ const forms = () => {
 
       form.closest(`.popup-design`) || form.getAttribute(`data-calc`) === `true` ? api = pathes.sendFileTo : api = pathes.sendQuestionTo;
 
-      if(form.getAttribute(`data-calc`) === `end`) {
-        for(let key in userData) {
-          formData.append(key, userData[key]);
-        }
-      }
-
       postData(api, formData)
       .then((res) => {
         console.log(res);

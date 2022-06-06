@@ -3,6 +3,8 @@ import sliders from "./modules/sliders";
 import forms from "./modules/forms";
 import mask from "./modules/mask";
 import isRussianLetters from "./modules/isRussianLetters";
+import showCards from "./modules/showCards";
+// import showCardsFromServer from "./modules/showCardsFromServer";
 
 window.addEventListener(`DOMContentLoaded`, () => {
   'use strict';
@@ -14,4 +16,11 @@ window.addEventListener(`DOMContentLoaded`, () => {
   mask(`[name=phone]`);
   isRussianLetters(`[name=name]`);
   isRussianLetters(`[name=message]`);
+
+  // Show various styles (optional)
+  // 1. By interacting with HTML Layout
+  showCards(`.button-styles`, `.styles-2`);
+
+  // 2. By interacting with server
+  // showCardsFromServer(`.button-styles`, `#styles .row`);
 });

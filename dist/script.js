@@ -4282,12 +4282,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_mask__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/mask */ "./src/js/modules/mask.js");
 /* harmony import */ var _modules_isRussianLetters__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/isRussianLetters */ "./src/js/modules/isRussianLetters.js");
 /* harmony import */ var _modules_showCards__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/showCards */ "./src/js/modules/showCards.js");
+/* harmony import */ var _modules_calcPrice__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/calcPrice */ "./src/js/modules/calcPrice.js");
+/* harmony import */ var _modules_filter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/filter */ "./src/js/modules/filter.js");
 
 
 
 
 
  // import showCardsFromServer from "./modules/showCardsFromServer";
+
+
 
 window.addEventListener("DOMContentLoaded", function () {
   'use strict';
@@ -4303,7 +4307,51 @@ window.addEventListener("DOMContentLoaded", function () {
 
   Object(_modules_showCards__WEBPACK_IMPORTED_MODULE_5__["default"])(".button-styles", ".styles-2"); // 2. By interacting with server
   // showCardsFromServer(`.button-styles`, `#styles .row`);
+
+  Object(_modules_calcPrice__WEBPACK_IMPORTED_MODULE_6__["default"])("#size", "#material", "#options", ".promocode", ".calc-price");
+  Object(_modules_filter__WEBPACK_IMPORTED_MODULE_7__["default"])(".portfolio-menu", "li", ".portfolio-wrapper", ".portfolio-block", ".portfolio-no");
 });
+
+/***/ }),
+
+/***/ "./src/js/modules/calcPrice.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/calcPrice.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var calcPrice = function calcPrice(size, material, options, promocode, result) {
+  var sizeBlock = document.querySelector(size),
+      materialBlock = document.querySelector(material),
+      optionsBlock = document.querySelector(options),
+      promocodeBlock = document.querySelector(promocode),
+      resultBlock = document.querySelector(result);
+  var sum = 0;
+
+  var calculator = function calculator() {
+    sum = Math.round(+sizeBlock.value * +materialBlock.value + +optionsBlock.value);
+
+    if (sizeBlock.value === "" || materialBlock.value === "") {
+      resultBlock.textContent = "\u0414\u043B\u044F \u0440\u0430\u0441\u0447\u0435\u0442\u0430 \u043D\u0443\u0436\u043D\u043E \u0432\u044B\u0431\u0440\u0430\u0442\u044C \u0440\u0430\u0437\u043C\u0435\u0440 \u043A\u0430\u0440\u0442\u0438\u043D\u044B \u0438 \u043C\u0430\u0442\u0435\u0440\u0438\u0430\u043B \u043A\u0430\u0440\u0442\u0438\u043D\u044B";
+    } else if (promocodeBlock.value === "IWANTPOPART") {
+      resultBlock.innerHTML = "".concat(Math.round(sum * 0.7), " &#8381;");
+      resultBlock.style.fontWeight = "700";
+    } else {
+      resultBlock.innerHTML = "".concat(Math.round(sum), " &#8381;");
+      resultBlock.style.fontWeight = "700";
+    }
+  };
+
+  sizeBlock.addEventListener("change", calculator);
+  materialBlock.addEventListener("change", calculator);
+  optionsBlock.addEventListener("change", calculator);
+  promocodeBlock.addEventListener("input", calculator);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (calcPrice);
 
 /***/ }),
 
@@ -4329,6 +4377,94 @@ var calcScrollWidth = function calcScrollWidth() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (calcScrollWidth);
+
+/***/ }),
+
+/***/ "./src/js/modules/filter.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/filter.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var filter = function filter(menuSelector, menuBtnsSelector, portfolioWrapper, portfolioWorks, noSuchWorks) {
+  var menu = document.querySelector(menuSelector),
+      menuButtons = menu.querySelectorAll(menuBtnsSelector),
+      portfolio = document.querySelector(portfolioWrapper),
+      works = portfolio.querySelectorAll(portfolioWorks),
+      noWorks = document.querySelector(noSuchWorks);
+
+  function showItem(item, display) {
+    var _item$classList;
+
+    item.style.display = display;
+
+    for (var _len = arguments.length, classes = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+      classes[_key - 2] = arguments[_key];
+    }
+
+    (_item$classList = item.classList).add.apply(_item$classList, classes);
+  }
+
+  function hideItem(item, display) {
+    var _item$classList2;
+
+    item.style.display = display;
+
+    for (var _len2 = arguments.length, classes = new Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
+      classes[_key2 - 2] = arguments[_key2];
+    }
+
+    (_item$classList2 = item.classList).remove.apply(_item$classList2, classes);
+  }
+
+  var makeFilter = function makeFilter(type) {
+    works.forEach(function (work) {
+      hideItem(work, "none", "animated", "fadeIn");
+    });
+    hideItem(noWorks, "none", "animated", "fadeIn");
+
+    if (type) {
+      type.forEach(function (typeItem) {
+        showItem(typeItem, "block", "animated", "fadeIn");
+      });
+    } else {
+      showItem(noWorks, "block", "animated", "fadeIn");
+    }
+  };
+
+  var callFilter = function callFilter(selector) {
+    var btn = menu.querySelector(selector),
+        works = portfolio.querySelectorAll(selector);
+    btn.addEventListener("click", function () {
+      works.length > 0 ? makeFilter(works) : makeFilter();
+    });
+  };
+
+  menu.addEventListener("click", function (e) {
+    if (e.target && e.target.tagName === "LI") {
+      menuButtons.forEach(function (btn) {
+        return btn.classList.remove("active");
+      });
+      e.target.classList.add("active");
+    }
+  });
+  callFilter(".all");
+  callFilter(".lovers");
+  callFilter(".girl");
+  callFilter(".chef");
+  callFilter(".guy");
+  callFilter(".grandmother");
+  callFilter(".granddad");
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (filter);
 
 /***/ }),
 
@@ -4417,13 +4553,6 @@ var forms = function forms() {
       var formData = new FormData(form);
       var api;
       form.closest(".popup-design") || form.getAttribute("data-calc") === "true" ? api = pathes.sendFileTo : api = pathes.sendQuestionTo;
-
-      if (form.getAttribute("data-calc") === "end") {
-        for (var key in userData) {
-          formData.append(key, userData[key]);
-        }
-      }
-
       Object(_services_requests__WEBPACK_IMPORTED_MODULE_7__["postData"])(api, formData).then(function (res) {
         console.log(res);
         statusImage.setAttribute("src", message.ok);

@@ -6,6 +6,7 @@ import isRussianLetters from "./modules/isRussianLetters";
 import showCards from "./modules/showCards";
 // import showCardsFromServer from "./modules/showCardsFromServer";
 import calcPrice from "./modules/calcPrice";
+import filter from "./modules/filter";
 
 window.addEventListener(`DOMContentLoaded`, () => {
   'use strict';
@@ -26,4 +27,5 @@ window.addEventListener(`DOMContentLoaded`, () => {
   // showCardsFromServer(`.button-styles`, `#styles .row`);
 
   calcPrice(`#size`, `#material`, `#options`, `.promocode`, `.calc-price`);
+  filter(`.portfolio-menu`, `li`, `.portfolio-wrapper`, `.portfolio-block`, `.portfolio-no`);
 });

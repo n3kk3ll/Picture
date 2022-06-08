@@ -9,6 +9,7 @@ import calcPrice from "./modules/calcPrice";
 import filter from "./modules/filter";
 import showSizesImg from "./modules/showSizesImg";
 import accordion from "./modules/accordion";
+import burger from "./modules/burger";
 
 window.addEventListener(`DOMContentLoaded`, () => {
   'use strict';
@@ -31,5 +32,6 @@ window.addEventListener(`DOMContentLoaded`, () => {
   calcPrice(`#size`, `#material`, `#options`, `.promocode`, `.calc-price`);
   filter(`.portfolio-menu`, `li`, `.portfolio-wrapper`, `.portfolio-block`, `.portfolio-no`);
   showSizesImg(`.sizes-block`);
-  accordion(`.accordion-heading`)
+  accordion(`.accordion-heading`);
+  burger(`.burger`, `.burger-menu`)
 });

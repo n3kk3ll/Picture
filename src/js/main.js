@@ -11,6 +11,7 @@ import showSizesImg from "./modules/showSizesImg";
 import accordion from "./modules/accordion";
 import burger from "./modules/burger";
 import scroll from "./modules/scroll";
+import dragndrop from "./modules/dragndrop";
 
 window.addEventListener(`DOMContentLoaded`, () => {
   'use strict';
@@ -36,4 +37,5 @@ window.addEventListener(`DOMContentLoaded`, () => {
   accordion(`.accordion-heading`);
   burger(`.burger`, `.burger-menu`);
   scroll(`.pageup`);
+  dragndrop();
 });

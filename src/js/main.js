@@ -10,6 +10,7 @@ import filter from "./modules/filter";
 import showSizesImg from "./modules/showSizesImg";
 import accordion from "./modules/accordion";
 import burger from "./modules/burger";
+import scroll from "./modules/scroll";
 
 window.addEventListener(`DOMContentLoaded`, () => {
   'use strict';
@@ -33,5 +34,6 @@ window.addEventListener(`DOMContentLoaded`, () => {
   filter(`.portfolio-menu`, `li`, `.portfolio-wrapper`, `.portfolio-block`, `.portfolio-no`);
   showSizesImg(`.sizes-block`);
   accordion(`.accordion-heading`);
-  burger(`.burger`, `.burger-menu`)
+  burger(`.burger`, `.burger-menu`);
+  scroll(`.pageup`);
 });
